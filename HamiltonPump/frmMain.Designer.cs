@@ -79,6 +79,9 @@
             this.numMaxVelocity = new System.Windows.Forms.NumericUpDown();
             this.btnExecSetMaxVelocity = new System.Windows.Forms.Button();
             this.btnSetMaxVelocity = new System.Windows.Forms.Button();
+            this.numStopVelocity = new System.Windows.Forms.NumericUpDown();
+            this.btnExecSetStopVelocity = new System.Windows.Forms.Button();
+            this.btnSetStopVelocity = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAbsPos)).BeginInit();
@@ -87,6 +90,7 @@
             this.grpValvePos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStartVelocity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxVelocity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numStopVelocity)).BeginInit();
             this.SuspendLayout();
             // 
             // btnInitToLeft
@@ -642,11 +646,56 @@
             this.btnSetMaxVelocity.UseVisualStyleBackColor = true;
             this.btnSetMaxVelocity.Click += new System.EventHandler(this.btnSetMaxVelocity_Click);
             // 
+            // numStopVelocity
+            // 
+            this.numStopVelocity.Location = new System.Drawing.Point(332, 297);
+            this.numStopVelocity.Maximum = new decimal(new int[] {
+            1700,
+            0,
+            0,
+            0});
+            this.numStopVelocity.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numStopVelocity.Name = "numStopVelocity";
+            this.numStopVelocity.Size = new System.Drawing.Size(120, 20);
+            this.numStopVelocity.TabIndex = 42;
+            this.numStopVelocity.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // btnExecSetStopVelocity
+            // 
+            this.btnExecSetStopVelocity.Location = new System.Drawing.Point(220, 297);
+            this.btnExecSetStopVelocity.Name = "btnExecSetStopVelocity";
+            this.btnExecSetStopVelocity.Size = new System.Drawing.Size(105, 23);
+            this.btnExecSetStopVelocity.TabIndex = 41;
+            this.btnExecSetStopVelocity.Text = "Exec Set Stop Vel";
+            this.btnExecSetStopVelocity.UseVisualStyleBackColor = true;
+            this.btnExecSetStopVelocity.Click += new System.EventHandler(this.btnExecSetStopVelocity_Click);
+            // 
+            // btnSetStopVelocity
+            // 
+            this.btnSetStopVelocity.Location = new System.Drawing.Point(128, 297);
+            this.btnSetStopVelocity.Name = "btnSetStopVelocity";
+            this.btnSetStopVelocity.Size = new System.Drawing.Size(86, 23);
+            this.btnSetStopVelocity.TabIndex = 40;
+            this.btnSetStopVelocity.Text = "Set Stop Vel";
+            this.btnSetStopVelocity.UseVisualStyleBackColor = true;
+            this.btnSetStopVelocity.Click += new System.EventHandler(this.btnSetStopVelocity_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.numStopVelocity);
+            this.Controls.Add(this.btnExecSetStopVelocity);
+            this.Controls.Add(this.btnSetStopVelocity);
             this.Controls.Add(this.numMaxVelocity);
             this.Controls.Add(this.btnExecSetMaxVelocity);
             this.Controls.Add(this.btnSetMaxVelocity);
@@ -697,6 +746,7 @@
             this.grpValvePos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStartVelocity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxVelocity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numStopVelocity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -754,6 +804,9 @@
         private System.Windows.Forms.NumericUpDown numMaxVelocity;
         private System.Windows.Forms.Button btnExecSetMaxVelocity;
         private System.Windows.Forms.Button btnSetMaxVelocity;
+        private System.Windows.Forms.NumericUpDown numStopVelocity;
+        private System.Windows.Forms.Button btnExecSetStopVelocity;
+        private System.Windows.Forms.Button btnSetStopVelocity;
     }
 }
 

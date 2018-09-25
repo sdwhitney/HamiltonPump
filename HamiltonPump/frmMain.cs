@@ -246,6 +246,12 @@ namespace HamiltonPump
             SendData();
         }
 
+        private void btnSetStopVelocity_Click(object sender, EventArgs e)
+        {
+            txtSend.Text = "/1c" + numStopVelocity.Value.ToString();
+            SendData();
+        }
+
         private void btnExecInitToLeft_Click(object sender, EventArgs e)
         {
             WaitForPumpNotBusy();
@@ -349,6 +355,16 @@ namespace HamiltonPump
             WaitForPumpNotBusy();
 
             txtSend.Text = "/1V" + numMaxVelocity.Value.ToString() + "R";
+            SendData();
+
+            WaitForPumpNotBusy();
+        }
+
+        private void btnExecSetStopVelocity_Click(object sender, EventArgs e)
+        {
+            WaitForPumpNotBusy();
+
+            txtSend.Text = "/1c" + numStopVelocity.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();

@@ -166,6 +166,39 @@ namespace HamiltonPump
             SendData();
         }
 
+        private void btnRelPickup_Click(object sender, EventArgs e)
+        {
+            txtSend.Text = "/1P" + numRelPickup.Value.ToString();
+            SendData();
+        }
+
+        private void btnRelDispense_Click(object sender, EventArgs e)
+        {
+            txtSend.Text = "/1D" + numRelDispense.Value.ToString();
+            SendData();
+        }
+
+        private void btnMoveValve_Click(object sender, EventArgs e)
+        {
+            var checkedButton = grpValvePos.Controls.OfType<RadioButton>()
+                                           .FirstOrDefault(r => r.Checked);
+            string valve = string.Empty;
+            if (checkedButton == rbInput)
+            {
+                valve = "I";
+            }
+            else if (checkedButton == rbExtra)
+            {
+                valve = "E";
+            }
+            else if (checkedButton == rbOutput)
+            {
+                valve = "O";
+            }
+            txtSend.Text = "/1" + valve;
+            SendData();
+        }
+
         private void btnExecInitToLeft_Click(object sender, EventArgs e)
         {
             WaitForPumpNotBusy();
@@ -192,8 +225,52 @@ namespace HamiltonPump
         {
             WaitForPumpNotBusy();
 
-            // Send initialization, with output port to right
             txtSend.Text = "/1A" + numAbsPos.Value.ToString() + "R";
+            SendData();
+
+            WaitForPumpNotBusy();
+        }
+
+        private void btnExecRelPickup_Click(object sender, EventArgs e)
+        {
+            WaitForPumpNotBusy();
+
+            txtSend.Text = "/1P" + numRelPickup.Value.ToString() + "R";
+            SendData();
+
+            WaitForPumpNotBusy();
+        }
+
+        private void btnExecRelDispense_Click(object sender, EventArgs e)
+        {
+            WaitForPumpNotBusy();
+
+            txtSend.Text = "/1D" + numRelDispense.Value.ToString() + "R";
+            SendData();
+
+            WaitForPumpNotBusy();
+        }
+
+        private void btnExecMoveValve_Click(object sender, EventArgs e)
+        {
+            WaitForPumpNotBusy();
+
+            var checkedButton = grpValvePos.Controls.OfType<RadioButton>()
+                                           .FirstOrDefault(r => r.Checked);
+            string valve = string.Empty;
+            if (checkedButton == rbInput)
+            {
+                valve = "I";
+            }
+            else if (checkedButton == rbExtra)
+            {
+                valve = "E";
+            }
+            else if (checkedButton == rbOutput)
+            {
+                valve = "O";
+            }
+            txtSend.Text = "/1" + valve + "R";
             SendData();
 
             WaitForPumpNotBusy();

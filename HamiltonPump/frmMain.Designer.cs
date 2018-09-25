@@ -58,16 +58,31 @@
             this.btnAbsPos = new System.Windows.Forms.Button();
             this.btnExecAbsPos = new System.Windows.Forms.Button();
             this.numAbsPos = new System.Windows.Forms.NumericUpDown();
+            this.numRelPickup = new System.Windows.Forms.NumericUpDown();
+            this.btnExecRelPickup = new System.Windows.Forms.Button();
+            this.btnRelPickup = new System.Windows.Forms.Button();
+            this.numRelDispense = new System.Windows.Forms.NumericUpDown();
+            this.btnExecRelDispense = new System.Windows.Forms.Button();
+            this.btnRelDispense = new System.Windows.Forms.Button();
+            this.btnExecMoveValve = new System.Windows.Forms.Button();
+            this.btnMoveValve = new System.Windows.Forms.Button();
+            this.grpValvePos = new System.Windows.Forms.GroupBox();
+            this.rbExtra = new System.Windows.Forms.RadioButton();
+            this.rbInput = new System.Windows.Forms.RadioButton();
+            this.rbOutput = new System.Windows.Forms.RadioButton();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAbsPos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRelPickup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRelDispense)).BeginInit();
+            this.grpValvePos.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnInitToLeft
             // 
             this.btnInitToLeft.Location = new System.Drawing.Point(128, 20);
             this.btnInitToLeft.Name = "btnInitToLeft";
-            this.btnInitToLeft.Size = new System.Drawing.Size(75, 23);
+            this.btnInitToLeft.Size = new System.Drawing.Size(86, 23);
             this.btnInitToLeft.TabIndex = 2;
             this.btnInitToLeft.Text = "Init To Left";
             this.btnInitToLeft.UseVisualStyleBackColor = true;
@@ -77,7 +92,7 @@
             // 
             this.btnInitToRight.Location = new System.Drawing.Point(128, 49);
             this.btnInitToRight.Name = "btnInitToRight";
-            this.btnInitToRight.Size = new System.Drawing.Size(75, 23);
+            this.btnInitToRight.Size = new System.Drawing.Size(86, 23);
             this.btnInitToRight.TabIndex = 3;
             this.btnInitToRight.Text = "Init To Right";
             this.btnInitToRight.UseVisualStyleBackColor = true;
@@ -349,7 +364,7 @@
             // 
             this.btnAbsPos.Location = new System.Drawing.Point(128, 78);
             this.btnAbsPos.Name = "btnAbsPos";
-            this.btnAbsPos.Size = new System.Drawing.Size(75, 23);
+            this.btnAbsPos.Size = new System.Drawing.Size(86, 23);
             this.btnAbsPos.TabIndex = 20;
             this.btnAbsPos.Text = "Abs Pos";
             this.btnAbsPos.UseVisualStyleBackColor = true;
@@ -377,11 +392,147 @@
             this.numAbsPos.Size = new System.Drawing.Size(120, 20);
             this.numAbsPos.TabIndex = 22;
             // 
+            // numRelPickup
+            // 
+            this.numRelPickup.Location = new System.Drawing.Point(332, 110);
+            this.numRelPickup.Maximum = new decimal(new int[] {
+            192000,
+            0,
+            0,
+            0});
+            this.numRelPickup.Name = "numRelPickup";
+            this.numRelPickup.Size = new System.Drawing.Size(120, 20);
+            this.numRelPickup.TabIndex = 25;
+            // 
+            // btnExecRelPickup
+            // 
+            this.btnExecRelPickup.Location = new System.Drawing.Point(220, 110);
+            this.btnExecRelPickup.Name = "btnExecRelPickup";
+            this.btnExecRelPickup.Size = new System.Drawing.Size(105, 23);
+            this.btnExecRelPickup.TabIndex = 24;
+            this.btnExecRelPickup.Text = "Exec Rel Pickup";
+            this.btnExecRelPickup.UseVisualStyleBackColor = true;
+            this.btnExecRelPickup.Click += new System.EventHandler(this.btnExecRelPickup_Click);
+            // 
+            // btnRelPickup
+            // 
+            this.btnRelPickup.Location = new System.Drawing.Point(128, 110);
+            this.btnRelPickup.Name = "btnRelPickup";
+            this.btnRelPickup.Size = new System.Drawing.Size(86, 23);
+            this.btnRelPickup.TabIndex = 23;
+            this.btnRelPickup.Text = "Rel Pickup";
+            this.btnRelPickup.UseVisualStyleBackColor = true;
+            this.btnRelPickup.Click += new System.EventHandler(this.btnRelPickup_Click);
+            // 
+            // numRelDispense
+            // 
+            this.numRelDispense.Location = new System.Drawing.Point(332, 141);
+            this.numRelDispense.Maximum = new decimal(new int[] {
+            192000,
+            0,
+            0,
+            0});
+            this.numRelDispense.Name = "numRelDispense";
+            this.numRelDispense.Size = new System.Drawing.Size(120, 20);
+            this.numRelDispense.TabIndex = 28;
+            // 
+            // btnExecRelDispense
+            // 
+            this.btnExecRelDispense.Location = new System.Drawing.Point(220, 141);
+            this.btnExecRelDispense.Name = "btnExecRelDispense";
+            this.btnExecRelDispense.Size = new System.Drawing.Size(105, 23);
+            this.btnExecRelDispense.TabIndex = 27;
+            this.btnExecRelDispense.Text = "Exec Rel Dispense";
+            this.btnExecRelDispense.UseVisualStyleBackColor = true;
+            this.btnExecRelDispense.Click += new System.EventHandler(this.btnExecRelDispense_Click);
+            // 
+            // btnRelDispense
+            // 
+            this.btnRelDispense.Location = new System.Drawing.Point(128, 141);
+            this.btnRelDispense.Name = "btnRelDispense";
+            this.btnRelDispense.Size = new System.Drawing.Size(86, 23);
+            this.btnRelDispense.TabIndex = 26;
+            this.btnRelDispense.Text = "Rel Dispense";
+            this.btnRelDispense.UseVisualStyleBackColor = true;
+            this.btnRelDispense.Click += new System.EventHandler(this.btnRelDispense_Click);
+            // 
+            // btnExecMoveValve
+            // 
+            this.btnExecMoveValve.Location = new System.Drawing.Point(220, 180);
+            this.btnExecMoveValve.Name = "btnExecMoveValve";
+            this.btnExecMoveValve.Size = new System.Drawing.Size(105, 23);
+            this.btnExecMoveValve.TabIndex = 30;
+            this.btnExecMoveValve.Text = "Exec Move Valve";
+            this.btnExecMoveValve.UseVisualStyleBackColor = true;
+            this.btnExecMoveValve.Click += new System.EventHandler(this.btnExecMoveValve_Click);
+            // 
+            // btnMoveValve
+            // 
+            this.btnMoveValve.Location = new System.Drawing.Point(128, 180);
+            this.btnMoveValve.Name = "btnMoveValve";
+            this.btnMoveValve.Size = new System.Drawing.Size(86, 23);
+            this.btnMoveValve.TabIndex = 29;
+            this.btnMoveValve.Text = "Move Valve";
+            this.btnMoveValve.UseVisualStyleBackColor = true;
+            this.btnMoveValve.Click += new System.EventHandler(this.btnMoveValve_Click);
+            // 
+            // grpValvePos
+            // 
+            this.grpValvePos.Controls.Add(this.rbOutput);
+            this.grpValvePos.Controls.Add(this.rbExtra);
+            this.grpValvePos.Controls.Add(this.rbInput);
+            this.grpValvePos.Location = new System.Drawing.Point(332, 167);
+            this.grpValvePos.Name = "grpValvePos";
+            this.grpValvePos.Size = new System.Drawing.Size(116, 44);
+            this.grpValvePos.TabIndex = 13;
+            this.grpValvePos.TabStop = false;
+            // 
+            // rbExtra
+            // 
+            this.rbExtra.AutoSize = true;
+            this.rbExtra.Checked = true;
+            this.rbExtra.Location = new System.Drawing.Point(40, 16);
+            this.rbExtra.Name = "rbExtra";
+            this.rbExtra.Size = new System.Drawing.Size(32, 17);
+            this.rbExtra.TabIndex = 1;
+            this.rbExtra.TabStop = true;
+            this.rbExtra.Text = "E";
+            this.rbExtra.UseVisualStyleBackColor = true;
+            // 
+            // rbInput
+            // 
+            this.rbInput.AutoSize = true;
+            this.rbInput.Location = new System.Drawing.Point(6, 16);
+            this.rbInput.Name = "rbInput";
+            this.rbInput.Size = new System.Drawing.Size(28, 17);
+            this.rbInput.TabIndex = 0;
+            this.rbInput.Text = "I";
+            this.rbInput.UseVisualStyleBackColor = true;
+            // 
+            // rbOutput
+            // 
+            this.rbOutput.AutoSize = true;
+            this.rbOutput.Location = new System.Drawing.Point(78, 16);
+            this.rbOutput.Name = "rbOutput";
+            this.rbOutput.Size = new System.Drawing.Size(33, 17);
+            this.rbOutput.TabIndex = 2;
+            this.rbOutput.Text = "O";
+            this.rbOutput.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.grpValvePos);
+            this.Controls.Add(this.btnExecMoveValve);
+            this.Controls.Add(this.btnMoveValve);
+            this.Controls.Add(this.numRelDispense);
+            this.Controls.Add(this.btnExecRelDispense);
+            this.Controls.Add(this.btnRelDispense);
+            this.Controls.Add(this.numRelPickup);
+            this.Controls.Add(this.btnExecRelPickup);
+            this.Controls.Add(this.btnRelPickup);
             this.Controls.Add(this.numAbsPos);
             this.Controls.Add(this.btnExecAbsPos);
             this.Controls.Add(this.btnAbsPos);
@@ -408,6 +559,10 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAbsPos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRelPickup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRelDispense)).EndInit();
+            this.grpValvePos.ResumeLayout(false);
+            this.grpValvePos.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -444,6 +599,18 @@
         private System.Windows.Forms.Button btnAbsPos;
         private System.Windows.Forms.Button btnExecAbsPos;
         private System.Windows.Forms.NumericUpDown numAbsPos;
+        private System.Windows.Forms.NumericUpDown numRelPickup;
+        private System.Windows.Forms.Button btnExecRelPickup;
+        private System.Windows.Forms.Button btnRelPickup;
+        private System.Windows.Forms.NumericUpDown numRelDispense;
+        private System.Windows.Forms.Button btnExecRelDispense;
+        private System.Windows.Forms.Button btnRelDispense;
+        private System.Windows.Forms.Button btnExecMoveValve;
+        private System.Windows.Forms.Button btnMoveValve;
+        private System.Windows.Forms.GroupBox grpValvePos;
+        private System.Windows.Forms.RadioButton rbOutput;
+        private System.Windows.Forms.RadioButton rbExtra;
+        private System.Windows.Forms.RadioButton rbInput;
     }
 }
 

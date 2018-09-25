@@ -70,6 +70,9 @@
             this.rbExtra = new System.Windows.Forms.RadioButton();
             this.rbInput = new System.Windows.Forms.RadioButton();
             this.rbOutput = new System.Windows.Forms.RadioButton();
+            this.btnExecSetAccel = new System.Windows.Forms.Button();
+            this.btnSetAccel = new System.Windows.Forms.Button();
+            this.cbSetAccel = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAbsPos)).BeginInit();
@@ -483,7 +486,7 @@
             this.grpValvePos.Controls.Add(this.rbInput);
             this.grpValvePos.Location = new System.Drawing.Point(332, 167);
             this.grpValvePos.Name = "grpValvePos";
-            this.grpValvePos.Size = new System.Drawing.Size(116, 44);
+            this.grpValvePos.Size = new System.Drawing.Size(116, 38);
             this.grpValvePos.TabIndex = 13;
             this.grpValvePos.TabStop = false;
             // 
@@ -519,11 +522,42 @@
             this.rbOutput.Text = "O";
             this.rbOutput.UseVisualStyleBackColor = true;
             // 
+            // btnExecSetAccel
+            // 
+            this.btnExecSetAccel.Location = new System.Drawing.Point(220, 210);
+            this.btnExecSetAccel.Name = "btnExecSetAccel";
+            this.btnExecSetAccel.Size = new System.Drawing.Size(105, 23);
+            this.btnExecSetAccel.TabIndex = 32;
+            this.btnExecSetAccel.Text = "Exec Set Accel";
+            this.btnExecSetAccel.UseVisualStyleBackColor = true;
+            this.btnExecSetAccel.Click += new System.EventHandler(this.btnExecSetAccel_Click);
+            // 
+            // btnSetAccel
+            // 
+            this.btnSetAccel.Location = new System.Drawing.Point(128, 210);
+            this.btnSetAccel.Name = "btnSetAccel";
+            this.btnSetAccel.Size = new System.Drawing.Size(86, 23);
+            this.btnSetAccel.TabIndex = 31;
+            this.btnSetAccel.Text = "Set Accel";
+            this.btnSetAccel.UseVisualStyleBackColor = true;
+            this.btnSetAccel.Click += new System.EventHandler(this.btnSetAccel_Click);
+            // 
+            // cbSetAccel
+            // 
+            this.cbSetAccel.FormattingEnabled = true;
+            this.cbSetAccel.Location = new System.Drawing.Point(332, 211);
+            this.cbSetAccel.Name = "cbSetAccel";
+            this.cbSetAccel.Size = new System.Drawing.Size(121, 21);
+            this.cbSetAccel.TabIndex = 33;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbSetAccel);
+            this.Controls.Add(this.btnExecSetAccel);
+            this.Controls.Add(this.btnSetAccel);
             this.Controls.Add(this.grpValvePos);
             this.Controls.Add(this.btnExecMoveValve);
             this.Controls.Add(this.btnMoveValve);
@@ -611,6 +645,9 @@
         private System.Windows.Forms.RadioButton rbOutput;
         private System.Windows.Forms.RadioButton rbExtra;
         private System.Windows.Forms.RadioButton rbInput;
+        private System.Windows.Forms.Button btnExecSetAccel;
+        private System.Windows.Forms.Button btnSetAccel;
+        private System.Windows.Forms.ComboBox cbSetAccel;
     }
 }
 

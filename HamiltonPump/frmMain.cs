@@ -234,6 +234,12 @@ namespace HamiltonPump
             SendData();
         }
 
+        private void btnSetStartVelocity_Click(object sender, EventArgs e)
+        {
+            txtSend.Text = "/1v" + numStartVelocity.Value.ToString();
+            SendData();
+        }
+
         private void btnExecInitToLeft_Click(object sender, EventArgs e)
         {
             WaitForPumpNotBusy();
@@ -317,6 +323,16 @@ namespace HamiltonPump
 
             Accel a = (Accel)Enum.Parse(typeof(Accel), cbSetAccel.SelectedItem.ToString());
             txtSend.Text = "/1L" + ((int)a).ToString() + "R";
+            SendData();
+
+            WaitForPumpNotBusy();
+        }
+
+        private void btnExecSetStartVelocity_Click(object sender, EventArgs e)
+        {
+            WaitForPumpNotBusy();
+
+            txtSend.Text = "/1v" + numStartVelocity.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();

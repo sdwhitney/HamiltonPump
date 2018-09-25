@@ -73,12 +73,16 @@
             this.btnExecSetAccel = new System.Windows.Forms.Button();
             this.btnSetAccel = new System.Windows.Forms.Button();
             this.cbSetAccel = new System.Windows.Forms.ComboBox();
+            this.numStartVelocity = new System.Windows.Forms.NumericUpDown();
+            this.btnExecSetStartVelocity = new System.Windows.Forms.Button();
+            this.btnSetStartVelocity = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAbsPos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRelPickup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRelDispense)).BeginInit();
             this.grpValvePos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numStartVelocity)).BeginInit();
             this.SuspendLayout();
             // 
             // btnInitToLeft
@@ -550,11 +554,56 @@
             this.cbSetAccel.Size = new System.Drawing.Size(121, 21);
             this.cbSetAccel.TabIndex = 33;
             // 
+            // numStartVelocity
+            // 
+            this.numStartVelocity.Location = new System.Drawing.Point(332, 239);
+            this.numStartVelocity.Maximum = new decimal(new int[] {
+            800,
+            0,
+            0,
+            0});
+            this.numStartVelocity.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numStartVelocity.Name = "numStartVelocity";
+            this.numStartVelocity.Size = new System.Drawing.Size(120, 20);
+            this.numStartVelocity.TabIndex = 36;
+            this.numStartVelocity.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // btnExecSetStartVelocity
+            // 
+            this.btnExecSetStartVelocity.Location = new System.Drawing.Point(220, 239);
+            this.btnExecSetStartVelocity.Name = "btnExecSetStartVelocity";
+            this.btnExecSetStartVelocity.Size = new System.Drawing.Size(105, 23);
+            this.btnExecSetStartVelocity.TabIndex = 35;
+            this.btnExecSetStartVelocity.Text = "Exec Set Start Vel";
+            this.btnExecSetStartVelocity.UseVisualStyleBackColor = true;
+            this.btnExecSetStartVelocity.Click += new System.EventHandler(this.btnExecSetStartVelocity_Click);
+            // 
+            // btnSetStartVelocity
+            // 
+            this.btnSetStartVelocity.Location = new System.Drawing.Point(128, 239);
+            this.btnSetStartVelocity.Name = "btnSetStartVelocity";
+            this.btnSetStartVelocity.Size = new System.Drawing.Size(86, 23);
+            this.btnSetStartVelocity.TabIndex = 34;
+            this.btnSetStartVelocity.Text = "Set Start Vel";
+            this.btnSetStartVelocity.UseVisualStyleBackColor = true;
+            this.btnSetStartVelocity.Click += new System.EventHandler(this.btnSetStartVelocity_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.numStartVelocity);
+            this.Controls.Add(this.btnExecSetStartVelocity);
+            this.Controls.Add(this.btnSetStartVelocity);
             this.Controls.Add(this.cbSetAccel);
             this.Controls.Add(this.btnExecSetAccel);
             this.Controls.Add(this.btnSetAccel);
@@ -597,6 +646,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numRelDispense)).EndInit();
             this.grpValvePos.ResumeLayout(false);
             this.grpValvePos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numStartVelocity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -648,6 +698,9 @@
         private System.Windows.Forms.Button btnExecSetAccel;
         private System.Windows.Forms.Button btnSetAccel;
         private System.Windows.Forms.ComboBox cbSetAccel;
+        private System.Windows.Forms.NumericUpDown numStartVelocity;
+        private System.Windows.Forms.Button btnExecSetStartVelocity;
+        private System.Windows.Forms.Button btnSetStartVelocity;
     }
 }
 

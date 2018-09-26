@@ -245,7 +245,8 @@ namespace HamiltonPump
 
             // TODO:  Replace Unicode \u0003 with <ETX> in message
 
-            DisplayWindow.AppendText(msg);
+            // Add date and time to milliseconds with message to display window
+            DisplayWindow.AppendText(DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt") + " " + msg);
             DisplayWindow.ScrollToCaret();
         }));
         }

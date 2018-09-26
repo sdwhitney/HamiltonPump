@@ -67,9 +67,9 @@
             this.btnExecMoveValve = new System.Windows.Forms.Button();
             this.btnMoveValve = new System.Windows.Forms.Button();
             this.grpValvePos = new System.Windows.Forms.GroupBox();
+            this.rbOutput = new System.Windows.Forms.RadioButton();
             this.rbExtra = new System.Windows.Forms.RadioButton();
             this.rbInput = new System.Windows.Forms.RadioButton();
-            this.rbOutput = new System.Windows.Forms.RadioButton();
             this.btnExecSetAccel = new System.Windows.Forms.Button();
             this.btnSetAccel = new System.Windows.Forms.Button();
             this.cbSetAccel = new System.Windows.Forms.ComboBox();
@@ -82,6 +82,8 @@
             this.numStopVelocity = new System.Windows.Forms.NumericUpDown();
             this.btnExecSetStopVelocity = new System.Windows.Forms.Button();
             this.btnSetStopVelocity = new System.Windows.Forms.Button();
+            this.btnAuxInput1Status = new System.Windows.Forms.Button();
+            this.btnAuxInput2Status = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAbsPos)).BeginInit();
@@ -502,6 +504,16 @@
             this.grpValvePos.TabIndex = 13;
             this.grpValvePos.TabStop = false;
             // 
+            // rbOutput
+            // 
+            this.rbOutput.AutoSize = true;
+            this.rbOutput.Location = new System.Drawing.Point(78, 16);
+            this.rbOutput.Name = "rbOutput";
+            this.rbOutput.Size = new System.Drawing.Size(33, 17);
+            this.rbOutput.TabIndex = 2;
+            this.rbOutput.Text = "O";
+            this.rbOutput.UseVisualStyleBackColor = true;
+            // 
             // rbExtra
             // 
             this.rbExtra.AutoSize = true;
@@ -523,16 +535,6 @@
             this.rbInput.TabIndex = 0;
             this.rbInput.Text = "I";
             this.rbInput.UseVisualStyleBackColor = true;
-            // 
-            // rbOutput
-            // 
-            this.rbOutput.AutoSize = true;
-            this.rbOutput.Location = new System.Drawing.Point(78, 16);
-            this.rbOutput.Name = "rbOutput";
-            this.rbOutput.Size = new System.Drawing.Size(33, 17);
-            this.rbOutput.TabIndex = 2;
-            this.rbOutput.Text = "O";
-            this.rbOutput.UseVisualStyleBackColor = true;
             // 
             // btnExecSetAccel
             // 
@@ -688,11 +690,33 @@
             this.btnSetStopVelocity.UseVisualStyleBackColor = true;
             this.btnSetStopVelocity.Click += new System.EventHandler(this.btnSetStopVelocity_Click);
             // 
+            // btnAuxInput1Status
+            // 
+            this.btnAuxInput1Status.Location = new System.Drawing.Point(472, 78);
+            this.btnAuxInput1Status.Name = "btnAuxInput1Status";
+            this.btnAuxInput1Status.Size = new System.Drawing.Size(75, 23);
+            this.btnAuxInput1Status.TabIndex = 43;
+            this.btnAuxInput1Status.Text = "Aux Input 1";
+            this.btnAuxInput1Status.UseVisualStyleBackColor = true;
+            this.btnAuxInput1Status.Click += new System.EventHandler(this.btnAuxInput1Status_Click);
+            // 
+            // btnAuxInput2Status
+            // 
+            this.btnAuxInput2Status.Location = new System.Drawing.Point(472, 107);
+            this.btnAuxInput2Status.Name = "btnAuxInput2Status";
+            this.btnAuxInput2Status.Size = new System.Drawing.Size(75, 23);
+            this.btnAuxInput2Status.TabIndex = 44;
+            this.btnAuxInput2Status.Text = "Aux Input 2";
+            this.btnAuxInput2Status.UseVisualStyleBackColor = true;
+            this.btnAuxInput2Status.Click += new System.EventHandler(this.btnAuxInput2Status_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnAuxInput2Status);
+            this.Controls.Add(this.btnAuxInput1Status);
             this.Controls.Add(this.numStopVelocity);
             this.Controls.Add(this.btnExecSetStopVelocity);
             this.Controls.Add(this.btnSetStopVelocity);
@@ -807,6 +831,8 @@
         private System.Windows.Forms.NumericUpDown numStopVelocity;
         private System.Windows.Forms.Button btnExecSetStopVelocity;
         private System.Windows.Forms.Button btnSetStopVelocity;
+        private System.Windows.Forms.Button btnAuxInput1Status;
+        private System.Windows.Forms.Button btnAuxInput2Status;
     }
 }
 

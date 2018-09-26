@@ -252,6 +252,18 @@ namespace HamiltonPump
             SendData();
         }
 
+        private void btnAuxInput1Status_Click(object sender, EventArgs e)
+        {
+            txtSend.Text = "/1?13";
+            SendData();
+        }
+
+        private void btnAuxInput2Status_Click(object sender, EventArgs e)
+        {
+            txtSend.Text = "/1?14";
+            SendData();
+        }
+
         private void btnExecInitToLeft_Click(object sender, EventArgs e)
         {
             WaitForPumpNotBusy();

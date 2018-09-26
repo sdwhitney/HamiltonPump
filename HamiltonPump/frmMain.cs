@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HamiltonPump
+namespace SyringePump
 {
     public partial class frmMain : Form
     {
@@ -169,48 +169,55 @@ namespace HamiltonPump
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            txtSend.Text = "/1Q";
+            txtSend.Text = $"/{GetPump()}Q";
             SendData();
         }
 
         private void btnInitToLeft_Click(object sender, EventArgs e)
         {
             // Send initialization, with output port to left
-            txtSend.Text = "/1Y";
+            txtSend.Text = $"/{GetPump()}Y";
             SendData();
         }
 
         private void btnInitToRight_Click(object sender, EventArgs e)
         {
             // Send initialization, with output port to right
-            txtSend.Text = "/1Z";
+            txtSend.Text = $"/{GetPump()}Z";
             SendData();
         }
 
         private void btnAbsPos_Click(object sender, EventArgs e)
         {
             // Send initialization, with output port to right
-            txtSend.Text = "/1A" + numAbsPos.Value.ToString();
+            txtSend.Text = $"/{GetPump()}A" + numAbsPos.Value.ToString();
             SendData();
         }
 
         private void btnRelPickup_Click(object sender, EventArgs e)
         {
-            txtSend.Text = "/1P" + numRelPickup.Value.ToString();
+            txtSend.Text = $"/{GetPump()}P" + numRelPickup.Value.ToString();
             SendData();
         }
 
         private void btnRelDispense_Click(object sender, EventArgs e)
         {
-            txtSend.Text = "/1D" + numRelDispense.Value.ToString();
+            txtSend.Text = $"/{GetPump()}D" + numRelDispense.Value.ToString();
             SendData();
         }
 
         private void btnMoveValve_Click(object sender, EventArgs e)
         {
+            string valve = GetValve();
+            txtSend.Text = $"/{GetPump()}" + GetValve();
+            SendData();
+        }
+
+        private string GetValve()
+        {
+            string valve = string.Empty;
             var checkedButton = grpValvePos.Controls.OfType<RadioButton>()
                                            .FirstOrDefault(r => r.Checked);
-            string valve = string.Empty;
             if (checkedButton == rbInput)
             {
                 valve = "I";
@@ -223,44 +230,65 @@ namespace HamiltonPump
             {
                 valve = "O";
             }
-            txtSend.Text = "/1" + valve;
-            SendData();
+
+            return valve;
+        }
+
+        private string GetPump()
+        {
+            var checkedPump = grpPump.Controls.OfType<RadioButton>()
+                                     .FirstOrDefault(r => r.Checked);
+            string pump = string.Empty;
+            if (checkedPump == rbLane1)
+            {
+                pump = ((char)PumpAddress.Lane1).ToString();
+            }
+            else if (checkedPump == rbLane2)
+            {
+                pump = ((char)PumpAddress.Lane2).ToString();
+            }
+            else if (checkedPump == rbAll)
+            {
+                pump = ((char)PumpAddress.All).ToString();
+            }
+
+            return pump;
         }
 
         private void btnSetAccel_Click(object sender, EventArgs e)
         {
             Accel a = (Accel)Enum.Parse(typeof(Accel), cbSetAccel.SelectedItem.ToString());
-            txtSend.Text = "/1L" + ((int)a).ToString();
+            txtSend.Text = $"/{GetPump()}L" + ((int)a).ToString();
             SendData();
         }
 
         private void btnSetStartVelocity_Click(object sender, EventArgs e)
         {
-            txtSend.Text = "/1v" + numStartVelocity.Value.ToString();
+            txtSend.Text = $"/{GetPump()}v" + numStartVelocity.Value.ToString();
             SendData();
         }
 
         private void btnSetMaxVelocity_Click(object sender, EventArgs e)
         {
-            txtSend.Text = "/1V" + numMaxVelocity.Value.ToString();
+            txtSend.Text = $"/{GetPump()}V" + numMaxVelocity.Value.ToString();
             SendData();
         }
 
         private void btnSetStopVelocity_Click(object sender, EventArgs e)
         {
-            txtSend.Text = "/1c" + numStopVelocity.Value.ToString();
+            txtSend.Text = $"/{GetPump()}c" + numStopVelocity.Value.ToString();
             SendData();
         }
 
         private void btnAuxInput1Status_Click(object sender, EventArgs e)
         {
-            txtSend.Text = "/1?13";
+            txtSend.Text = $"/{GetPump()}?13";
             SendData();
         }
 
         private void btnAuxInput2Status_Click(object sender, EventArgs e)
         {
-            txtSend.Text = "/1?14";
+            txtSend.Text = $"/{GetPump()}?14";
             SendData();
         }
 
@@ -269,7 +297,7 @@ namespace HamiltonPump
             WaitForPumpNotBusy();
 
             // Send initialization, with output port to left
-            txtSend.Text = "/1YR";
+            txtSend.Text = $"/{GetPump()}YR";
             SendData();
 
             WaitForPumpNotBusy();
@@ -280,7 +308,7 @@ namespace HamiltonPump
             WaitForPumpNotBusy();
 
             // Send initialization, with output port to right
-            txtSend.Text = "/1ZR";
+            txtSend.Text = $"/{GetPump()}ZR";
             SendData();
 
             WaitForPumpNotBusy();
@@ -290,7 +318,7 @@ namespace HamiltonPump
         {
             WaitForPumpNotBusy();
 
-            txtSend.Text = "/1A" + numAbsPos.Value.ToString() + "R";
+            txtSend.Text = $"/{GetPump()}A" + numAbsPos.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -300,7 +328,7 @@ namespace HamiltonPump
         {
             WaitForPumpNotBusy();
 
-            txtSend.Text = "/1P" + numRelPickup.Value.ToString() + "R";
+            txtSend.Text = $"/{GetPump()}P" + numRelPickup.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -310,7 +338,7 @@ namespace HamiltonPump
         {
             WaitForPumpNotBusy();
 
-            txtSend.Text = "/1D" + numRelDispense.Value.ToString() + "R";
+            txtSend.Text = $"/{GetPump()}D" + numRelDispense.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -320,22 +348,7 @@ namespace HamiltonPump
         {
             WaitForPumpNotBusy();
 
-            var checkedButton = grpValvePos.Controls.OfType<RadioButton>()
-                                           .FirstOrDefault(r => r.Checked);
-            string valve = string.Empty;
-            if (checkedButton == rbInput)
-            {
-                valve = "I";
-            }
-            else if (checkedButton == rbExtra)
-            {
-                valve = "E";
-            }
-            else if (checkedButton == rbOutput)
-            {
-                valve = "O";
-            }
-            txtSend.Text = "/1" + valve + "R";
+            txtSend.Text = $"/{GetPump()}" + GetValve() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -346,7 +359,7 @@ namespace HamiltonPump
             WaitForPumpNotBusy();
 
             Accel a = (Accel)Enum.Parse(typeof(Accel), cbSetAccel.SelectedItem.ToString());
-            txtSend.Text = "/1L" + ((int)a).ToString() + "R";
+            txtSend.Text = $"/{GetPump()}L" + ((int)a).ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -356,7 +369,7 @@ namespace HamiltonPump
         {
             WaitForPumpNotBusy();
 
-            txtSend.Text = "/1v" + numStartVelocity.Value.ToString() + "R";
+            txtSend.Text = $"/{GetPump()}v" + numStartVelocity.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -366,7 +379,7 @@ namespace HamiltonPump
         {
             WaitForPumpNotBusy();
 
-            txtSend.Text = "/1V" + numMaxVelocity.Value.ToString() + "R";
+            txtSend.Text = $"/{GetPump()}V" + numMaxVelocity.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -376,7 +389,7 @@ namespace HamiltonPump
         {
             WaitForPumpNotBusy();
 
-            txtSend.Text = "/1c" + numStopVelocity.Value.ToString() + "R";
+            txtSend.Text = $"/{GetPump()}c" + numStopVelocity.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -385,16 +398,16 @@ namespace HamiltonPump
         private void btnExecute_Click(object sender, EventArgs e)
         {
             // Send execute command - broadcast
-            txtSend.Text = "/_R";
+            txtSend.Text = $"/{GetPump()}R";
             SendData();
         }
 
-        private void WaitForPumpNotBusy()
+        private void WaitForPumpNotBusy(PumpAddress addr = PumpAddress.Lane1)
         {
             // Make sure pump is not busy
             do
             {
-                txtSend.Text = "/1Q";
+                txtSend.Text = $"/{GetPump()}Q";
                 SendData();
                 Wait100();
             } while (PumpBusy);

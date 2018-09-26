@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HamiltonPump.Properties
+namespace SyringePump.Properties
 {
 
 

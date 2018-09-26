@@ -1,4 +1,4 @@
-﻿namespace HamiltonPump
+﻿namespace SyringePump
 {
     partial class frmMain
     {
@@ -84,6 +84,10 @@
             this.btnSetStopVelocity = new System.Windows.Forms.Button();
             this.btnAuxInput1Status = new System.Windows.Forms.Button();
             this.btnAuxInput2Status = new System.Windows.Forms.Button();
+            this.grpPump = new System.Windows.Forms.GroupBox();
+            this.rbAll = new System.Windows.Forms.RadioButton();
+            this.rbLane2 = new System.Windows.Forms.RadioButton();
+            this.rbLane1 = new System.Windows.Forms.RadioButton();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAbsPos)).BeginInit();
@@ -93,6 +97,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numStartVelocity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxVelocity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStopVelocity)).BeginInit();
+            this.grpPump.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnInitToLeft
@@ -710,11 +715,56 @@
             this.btnAuxInput2Status.UseVisualStyleBackColor = true;
             this.btnAuxInput2Status.Click += new System.EventHandler(this.btnAuxInput2Status_Click);
             // 
+            // grpPump
+            // 
+            this.grpPump.Controls.Add(this.rbAll);
+            this.grpPump.Controls.Add(this.rbLane2);
+            this.grpPump.Controls.Add(this.rbLane1);
+            this.grpPump.Location = new System.Drawing.Point(128, 350);
+            this.grpPump.Name = "grpPump";
+            this.grpPump.Size = new System.Drawing.Size(168, 46);
+            this.grpPump.TabIndex = 45;
+            this.grpPump.TabStop = false;
+            this.grpPump.Text = "Pump";
+            // 
+            // rbAll
+            // 
+            this.rbAll.AutoSize = true;
+            this.rbAll.Location = new System.Drawing.Point(128, 16);
+            this.rbAll.Name = "rbAll";
+            this.rbAll.Size = new System.Drawing.Size(36, 17);
+            this.rbAll.TabIndex = 2;
+            this.rbAll.Text = "All";
+            this.rbAll.UseVisualStyleBackColor = true;
+            // 
+            // rbLane2
+            // 
+            this.rbLane2.AutoSize = true;
+            this.rbLane2.Location = new System.Drawing.Point(67, 16);
+            this.rbLane2.Name = "rbLane2";
+            this.rbLane2.Size = new System.Drawing.Size(55, 17);
+            this.rbLane2.TabIndex = 1;
+            this.rbLane2.Text = "Lane2";
+            this.rbLane2.UseVisualStyleBackColor = true;
+            // 
+            // rbLane1
+            // 
+            this.rbLane1.AutoSize = true;
+            this.rbLane1.Checked = true;
+            this.rbLane1.Location = new System.Drawing.Point(6, 16);
+            this.rbLane1.Name = "rbLane1";
+            this.rbLane1.Size = new System.Drawing.Size(55, 17);
+            this.rbLane1.TabIndex = 0;
+            this.rbLane1.TabStop = true;
+            this.rbLane1.Text = "Lane1";
+            this.rbLane1.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(955, 450);
+            this.Controls.Add(this.grpPump);
             this.Controls.Add(this.btnAuxInput2Status);
             this.Controls.Add(this.btnAuxInput1Status);
             this.Controls.Add(this.numStopVelocity);
@@ -771,6 +821,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numStartVelocity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxVelocity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStopVelocity)).EndInit();
+            this.grpPump.ResumeLayout(false);
+            this.grpPump.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -833,6 +885,10 @@
         private System.Windows.Forms.Button btnSetStopVelocity;
         private System.Windows.Forms.Button btnAuxInput1Status;
         private System.Windows.Forms.Button btnAuxInput2Status;
+        private System.Windows.Forms.GroupBox grpPump;
+        private System.Windows.Forms.RadioButton rbAll;
+        private System.Windows.Forms.RadioButton rbLane2;
+        private System.Windows.Forms.RadioButton rbLane1;
     }
 }
 

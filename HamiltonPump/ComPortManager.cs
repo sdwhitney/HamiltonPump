@@ -5,7 +5,7 @@ using System.IO.Ports;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
-namespace HamiltonPump
+namespace SyringePump
 {
     class ComPortManager
     {

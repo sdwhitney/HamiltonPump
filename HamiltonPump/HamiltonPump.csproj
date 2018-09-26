@@ -53,8 +53,13 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="HamiltonSyringe.cs" />
+    <Compile Include="ISyringePump.cs" />
+    <Compile Include="ISyringePumpHAL.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PumpAddress.cs" />
+    <Compile Include="PumpConfig.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>

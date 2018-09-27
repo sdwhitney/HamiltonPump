@@ -8,6 +8,9 @@ namespace SyringePump
 {
     public class HamiltonSyringe : ISyringePump
     {
+        private PumpConfig PumpConfig { get; set; }
+        private PumpAddress PumpAddress { get; set; }
+
         public void AbsolutePosition(int steps)
         {
             throw new NotImplementedException();
@@ -28,7 +31,7 @@ namespace SyringePump
             throw new NotImplementedException();
         }
 
-        public void InitializeSyringeAndValve()
+        public void InitializeSyringeAndValve(bool outputToLeft = true)
         {
             throw new NotImplementedException();
         }
@@ -40,7 +43,12 @@ namespace SyringePump
 
         public bool QueryStatus(out char status)
         {
+#if false
+            frmMain.txtSend.Text = $"/{GetPump()}Q";
+            frmMain.SendData();
+#else
             throw new NotImplementedException();
+#endif
         }
 
         public void RelativeDispense(int steps)

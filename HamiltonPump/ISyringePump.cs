@@ -19,7 +19,11 @@ namespace SyringePump
         /// <summary>
         /// Initializes the syringe pump and its valve to home position
         /// </summary>
-        void InitializeSyringeAndValve();
+        /// <param name="outputToLeft">
+        /// If true, initialize valve with left-hand port as output,
+        /// otherwise initialize valve with right-hand port as output
+        /// </param>
+        void InitializeSyringeAndValve(bool outputToLeft = true);
 
         /// <summary>
         /// Move the syringe to an absolute position

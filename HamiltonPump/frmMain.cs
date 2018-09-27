@@ -12,7 +12,8 @@ namespace SyringePump
 {
     public partial class frmMain : Form
     {
-        ComPortManager comm = new ComPortManager();
+        internal ComPortManager Comm { get; set; } = new ComPortManager();
+
         string transType = string.Empty;
 
         public enum Accel
@@ -53,15 +54,15 @@ namespace SyringePump
 
         private void cmdOpen_Click(object sender, EventArgs e)
         {
-            comm.PortName = cboPort.Text;
-            comm.Parity = cboParity.Text;
-            comm.StopBits = cboStop.Text;
-            comm.DataBits = cboData.Text;
-            comm.BaudRate = cboBaud.Text;
-            comm.DisplayWindow = rtbDisplay;
-            comm.OpenPort();
+            Comm.PortName = cboPort.Text;
+            Comm.Parity = cboParity.Text;
+            Comm.StopBits = cboStop.Text;
+            Comm.DataBits = cboData.Text;
+            Comm.BaudRate = cboBaud.Text;
+            Comm.DisplayWindow = rtbDisplay;
+            Comm.OpenPort();
 
-            if (true == comm.IsPortOpen)
+            if (true == Comm.IsPortOpen)
             {
                 cmdOpen.Enabled = false;
                 cmdClose.Enabled = true;
@@ -89,9 +90,9 @@ namespace SyringePump
         /// </summary>
         private void LoadValues()
         {
-            comm.SetPortNameValues(cboPort);
-            comm.SetParityValues(cboParity);
-            comm.SetStopBitValues(cboStop);
+            Comm.SetPortNameValues(cboPort);
+            Comm.SetParityValues(cboParity);
+            Comm.SetStopBitValues(cboStop);
         }
 
         /// <summary>
@@ -118,7 +119,12 @@ namespace SyringePump
         {
             // Do not convert to upper case!
             //comm.WriteData(txtSend.Text.ToUpper());
-            comm.WriteData(txtSend.Text);
+            Comm.WriteData(txtSend.Text);
+            if (!Comm.DataReadyEvent.WaitOne(1000))
+            {
+                MessageBox.Show("Data was not received in 1 second!");
+            }
+            Comm.DataReadyEvent.Reset();
             txtSend.SelectAll();
         }
 
@@ -126,18 +132,18 @@ namespace SyringePump
         {
             if (rdoHex.Checked == true)
             {
-                comm.CurrentTransmissionType = ComPortManager.TransmissionType.Hex;
+                Comm.CurrentTransmissionType = ComPortManager.TransmissionType.Hex;
             }
             else
             {
-                comm.CurrentTransmissionType = ComPortManager.TransmissionType.Text;
+                Comm.CurrentTransmissionType = ComPortManager.TransmissionType.Text;
             }
 
         }
 
         private void chkBoxEOL_CheckedChanged(object sender, EventArgs e)
         {
-            comm.AutoEOL = chkBoxEOL.Checked;
+            Comm.AutoEOL = chkBoxEOL.Checked;
         }
 
         private void txtSend_KeyPress(object sender, KeyPressEventArgs e)
@@ -150,8 +156,8 @@ namespace SyringePump
 
         private void cmdClose_Click(object sender, EventArgs e)
         {
-            comm.ClosePort();
-            if (false == comm.IsPortOpen)
+            Comm.ClosePort();
+            if (false == Comm.IsPortOpen)
             {
                 cmdOpen.Enabled = true;
                 cmdClose.Enabled = false;
@@ -165,7 +171,7 @@ namespace SyringePump
             Application.Exit();
         }
 
-        private bool PumpBusy => comm.RcvdMsg != "/0`\u0003";
+        private bool PumpBusy => Comm.RcvdMsg != "/0`\u0003";
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
@@ -415,19 +421,8 @@ namespace SyringePump
 
         private static void Wait100()
         {
-            var t = Task.Run(async delegate
-            {
-                await Task.Delay(100);
-            });
-            try
-            {
-                t.Wait();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            System.Threading.Thread.Sleep(100);
         }
 
-    }
+        }
 }

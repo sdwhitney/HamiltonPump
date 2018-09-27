@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace SyringePump
 {
@@ -73,6 +74,8 @@ namespace SyringePump
         public string PortName { get; set; } = string.Empty;
 
         public string RcvdMsg { get; set; } = string.Empty;
+
+        public ManualResetEvent DataReadyEvent { get; set; } = new ManualResetEvent(false);
 
         /// <summary>
         /// property to hold our TransmissionType
@@ -345,6 +348,7 @@ namespace SyringePump
                     //display the data to the user
                     if (msg.Length > 0)
                     {
+                        DataReadyEvent.Set();
                         RcvdMsg = msg;
                         DisplayData(MessageType.Incoming, msg + "\n");
                     }

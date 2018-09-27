@@ -238,7 +238,7 @@ namespace SyringePump
         /// <param name="type">MessageType of the message</param>
         /// <param name="msg">Message to display</param>
         [STAThread]
-        private void DisplayData(MessageType type, string msg)
+        public void DisplayData(MessageType type, string msg)
         {
             DisplayWindow.Invoke(new EventHandler(delegate
         {

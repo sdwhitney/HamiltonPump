@@ -316,7 +316,7 @@
             // 
             this.rtbDisplay.Location = new System.Drawing.Point(553, 30);
             this.rtbDisplay.Name = "rtbDisplay";
-            this.rtbDisplay.Size = new System.Drawing.Size(399, 408);
+            this.rtbDisplay.Size = new System.Drawing.Size(423, 408);
             this.rtbDisplay.TabIndex = 13;
             this.rtbDisplay.Text = "";
             // 
@@ -763,7 +763,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(955, 450);
+            this.ClientSize = new System.Drawing.Size(979, 450);
             this.Controls.Add(this.grpPump);
             this.Controls.Add(this.btnAuxInput2Status);
             this.Controls.Add(this.btnAuxInput1Status);

@@ -59,7 +59,7 @@ namespace SyringePump
             Comm.StopBits = cboStop.Text;
             Comm.DataBits = cboData.Text;
             Comm.BaudRate = cboBaud.Text;
-            Comm.DisplayWindow = rtbDisplay;
+            //Comm.DisplayWindow = rtbDisplay;
             Comm.OpenPort();
 
             if (true == Comm.IsPortOpen)
@@ -90,6 +90,7 @@ namespace SyringePump
         /// </summary>
         private void LoadValues()
         {
+            Comm.DisplayWindow = rtbDisplay;
             Comm.SetPortNameValues(cboPort);
             Comm.SetParityValues(cboParity);
             Comm.SetStopBitValues(cboStop);
@@ -117,12 +118,10 @@ namespace SyringePump
 
         private void SendData()
         {
-            // Do not convert to upper case!
-            //comm.WriteData(txtSend.Text.ToUpper());
             Comm.WriteData(txtSend.Text);
             if (!Comm.DataReadyEvent.WaitOne(1000))
             {
-                MessageBox.Show("Data was not received in 1 second!");
+                Comm.DisplayData(ComPortManager.MessageType.Error, "Data was not received in 1 second!\n");
             }
             Comm.DataReadyEvent.Reset();
             txtSend.SelectAll();
@@ -175,47 +174,47 @@ namespace SyringePump
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            txtSend.Text = $"/{GetPump()}Q";
+            txtSend.Text = $"/{Pump}Q";
             SendData();
         }
 
         private void btnInitToLeft_Click(object sender, EventArgs e)
         {
             // Send initialization, with output port to left
-            txtSend.Text = $"/{GetPump()}Y";
+            txtSend.Text = $"/{Pump}Y";
             SendData();
         }
 
         private void btnInitToRight_Click(object sender, EventArgs e)
         {
             // Send initialization, with output port to right
-            txtSend.Text = $"/{GetPump()}Z";
+            txtSend.Text = $"/{Pump}Z";
             SendData();
         }
 
         private void btnAbsPos_Click(object sender, EventArgs e)
         {
             // Send initialization, with output port to right
-            txtSend.Text = $"/{GetPump()}A" + numAbsPos.Value.ToString();
+            txtSend.Text = $"/{Pump}A" + numAbsPos.Value.ToString();
             SendData();
         }
 
         private void btnRelPickup_Click(object sender, EventArgs e)
         {
-            txtSend.Text = $"/{GetPump()}P" + numRelPickup.Value.ToString();
+            txtSend.Text = $"/{Pump}P" + numRelPickup.Value.ToString();
             SendData();
         }
 
         private void btnRelDispense_Click(object sender, EventArgs e)
         {
-            txtSend.Text = $"/{GetPump()}D" + numRelDispense.Value.ToString();
+            txtSend.Text = $"/{Pump}D" + numRelDispense.Value.ToString();
             SendData();
         }
 
         private void btnMoveValve_Click(object sender, EventArgs e)
         {
             string valve = GetValve();
-            txtSend.Text = $"/{GetPump()}" + GetValve();
+            txtSend.Text = $"/{Pump}" + GetValve();
             SendData();
         }
 
@@ -240,61 +239,64 @@ namespace SyringePump
             return valve;
         }
 
-        private string GetPump()
+        private string Pump
         {
-            var checkedPump = grpPump.Controls.OfType<RadioButton>()
-                                     .FirstOrDefault(r => r.Checked);
-            string pump = string.Empty;
-            if (checkedPump == rbLane1)
+            get
             {
-                pump = ((char)PumpAddress.Lane1).ToString();
-            }
-            else if (checkedPump == rbLane2)
-            {
-                pump = ((char)PumpAddress.Lane2).ToString();
-            }
-            else if (checkedPump == rbAll)
-            {
-                pump = ((char)PumpAddress.All).ToString();
-            }
+                var checkedPump = grpPump.Controls.OfType<RadioButton>()
+                                         .FirstOrDefault(r => r.Checked);
+                string pump = string.Empty;
+                if (checkedPump == rbLane1)
+                {
+                    pump = ((char)PumpAddress.Lane1).ToString();
+                }
+                else if (checkedPump == rbLane2)
+                {
+                    pump = ((char)PumpAddress.Lane2).ToString();
+                }
+                else if (checkedPump == rbAll)
+                {
+                    pump = ((char)PumpAddress.All).ToString();
+                }
 
-            return pump;
+                return pump;
+            }
         }
 
         private void btnSetAccel_Click(object sender, EventArgs e)
         {
             Accel a = (Accel)Enum.Parse(typeof(Accel), cbSetAccel.SelectedItem.ToString());
-            txtSend.Text = $"/{GetPump()}L" + ((int)a).ToString();
+            txtSend.Text = $"/{Pump}L" + ((int)a).ToString();
             SendData();
         }
 
         private void btnSetStartVelocity_Click(object sender, EventArgs e)
         {
-            txtSend.Text = $"/{GetPump()}v" + numStartVelocity.Value.ToString();
+            txtSend.Text = $"/{Pump}v" + numStartVelocity.Value.ToString();
             SendData();
         }
 
         private void btnSetMaxVelocity_Click(object sender, EventArgs e)
         {
-            txtSend.Text = $"/{GetPump()}V" + numMaxVelocity.Value.ToString();
+            txtSend.Text = $"/{Pump}V" + numMaxVelocity.Value.ToString();
             SendData();
         }
 
         private void btnSetStopVelocity_Click(object sender, EventArgs e)
         {
-            txtSend.Text = $"/{GetPump()}c" + numStopVelocity.Value.ToString();
+            txtSend.Text = $"/{Pump}c" + numStopVelocity.Value.ToString();
             SendData();
         }
 
         private void btnAuxInput1Status_Click(object sender, EventArgs e)
         {
-            txtSend.Text = $"/{GetPump()}?13";
+            txtSend.Text = $"/{Pump}?13";
             SendData();
         }
 
         private void btnAuxInput2Status_Click(object sender, EventArgs e)
         {
-            txtSend.Text = $"/{GetPump()}?14";
+            txtSend.Text = $"/{Pump}?14";
             SendData();
         }
 
@@ -303,7 +305,7 @@ namespace SyringePump
             WaitForPumpNotBusy();
 
             // Send initialization, with output port to left
-            txtSend.Text = $"/{GetPump()}YR";
+            txtSend.Text = $"/{Pump}YR";
             SendData();
 
             WaitForPumpNotBusy();
@@ -314,7 +316,7 @@ namespace SyringePump
             WaitForPumpNotBusy();
 
             // Send initialization, with output port to right
-            txtSend.Text = $"/{GetPump()}ZR";
+            txtSend.Text = $"/{Pump}ZR";
             SendData();
 
             WaitForPumpNotBusy();
@@ -324,7 +326,7 @@ namespace SyringePump
         {
             WaitForPumpNotBusy();
 
-            txtSend.Text = $"/{GetPump()}A" + numAbsPos.Value.ToString() + "R";
+            txtSend.Text = $"/{Pump}A" + numAbsPos.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -334,7 +336,7 @@ namespace SyringePump
         {
             WaitForPumpNotBusy();
 
-            txtSend.Text = $"/{GetPump()}P" + numRelPickup.Value.ToString() + "R";
+            txtSend.Text = $"/{Pump}P" + numRelPickup.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -344,7 +346,7 @@ namespace SyringePump
         {
             WaitForPumpNotBusy();
 
-            txtSend.Text = $"/{GetPump()}D" + numRelDispense.Value.ToString() + "R";
+            txtSend.Text = $"/{Pump}D" + numRelDispense.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -354,7 +356,7 @@ namespace SyringePump
         {
             WaitForPumpNotBusy();
 
-            txtSend.Text = $"/{GetPump()}" + GetValve() + "R";
+            txtSend.Text = $"/{Pump}" + GetValve() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -365,7 +367,7 @@ namespace SyringePump
             WaitForPumpNotBusy();
 
             Accel a = (Accel)Enum.Parse(typeof(Accel), cbSetAccel.SelectedItem.ToString());
-            txtSend.Text = $"/{GetPump()}L" + ((int)a).ToString() + "R";
+            txtSend.Text = $"/{Pump}L" + ((int)a).ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -375,7 +377,7 @@ namespace SyringePump
         {
             WaitForPumpNotBusy();
 
-            txtSend.Text = $"/{GetPump()}v" + numStartVelocity.Value.ToString() + "R";
+            txtSend.Text = $"/{Pump}v" + numStartVelocity.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -385,7 +387,7 @@ namespace SyringePump
         {
             WaitForPumpNotBusy();
 
-            txtSend.Text = $"/{GetPump()}V" + numMaxVelocity.Value.ToString() + "R";
+            txtSend.Text = $"/{Pump}V" + numMaxVelocity.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -395,7 +397,7 @@ namespace SyringePump
         {
             WaitForPumpNotBusy();
 
-            txtSend.Text = $"/{GetPump()}c" + numStopVelocity.Value.ToString() + "R";
+            txtSend.Text = $"/{Pump}c" + numStopVelocity.Value.ToString() + "R";
             SendData();
 
             WaitForPumpNotBusy();
@@ -404,7 +406,7 @@ namespace SyringePump
         private void btnExecute_Click(object sender, EventArgs e)
         {
             // Send execute command - broadcast
-            txtSend.Text = $"/{GetPump()}R";
+            txtSend.Text = $"/{Pump}R";
             SendData();
         }
 
@@ -413,16 +415,11 @@ namespace SyringePump
             // Make sure pump is not busy
             do
             {
-                txtSend.Text = $"/{GetPump()}Q";
+                txtSend.Text = $"/{Pump}Q";
                 SendData();
-                Wait100();
+                System.Threading.Thread.Sleep(100);
             } while (PumpBusy);
         }
 
-        private static void Wait100()
-        {
-            System.Threading.Thread.Sleep(100);
-        }
-
-        }
+    }
 }

@@ -59,6 +59,7 @@ namespace SyringePump
         /// </summary>
         private void SetDefaults()
         {
+            // Selects the first com port in the list
             cboPort.SelectedIndex = 0;
             cboBaud.SelectedText = "9600";
             cboParity.SelectedIndex = 0;
@@ -409,7 +410,8 @@ namespace SyringePump
         /// </summary>
         private void SetValveDefaults()
         {
-            cboValvePort.SelectedIndex = 0;
+            // Selects the last com port in the list
+            cboValvePort.SelectedIndex = cboValvePort.Items.Count - 1;
             cboValveBaud.SelectedText = "19200";
             cboValveParity.SelectedIndex = 0;
             cboValveStop.SelectedIndex = 1;

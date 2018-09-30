@@ -91,6 +91,7 @@
             this.btnInitToRight = new System.Windows.Forms.Button();
             this.btnInitToLeft = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cboSetValvePosition = new System.Windows.Forms.ComboBox();
             this.btnValveSend = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rdoValveText = new System.Windows.Forms.RadioButton();
@@ -115,7 +116,6 @@
             this.cboValvePort = new System.Windows.Forms.ComboBox();
             this.btnValveStatus = new System.Windows.Forms.Button();
             this.btnValveHome = new System.Windows.Forms.Button();
-            this.cboSetValvePosition = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.grpPump.SuspendLayout();
@@ -318,7 +318,7 @@
             this.numMaxVelocity.Size = new System.Drawing.Size(120, 20);
             this.numMaxVelocity.TabIndex = 81;
             this.numMaxVelocity.Value = new decimal(new int[] {
-            2,
+            3400,
             0,
             0,
             0});
@@ -876,6 +876,14 @@
             this.tabPage2.Text = "Idex Rotary Valve";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // cboSetValvePosition
+            // 
+            this.cboSetValvePosition.FormattingEnabled = true;
+            this.cboSetValvePosition.Location = new System.Drawing.Point(231, 72);
+            this.cboSetValvePosition.Name = "cboSetValvePosition";
+            this.cboSetValvePosition.Size = new System.Drawing.Size(121, 21);
+            this.cboSetValvePosition.TabIndex = 93;
+            // 
             // btnValveSend
             // 
             this.btnValveSend.Location = new System.Drawing.Point(464, 392);
@@ -1098,6 +1106,7 @@
             this.cboValveBaud.Name = "cboValveBaud";
             this.cboValveBaud.Size = new System.Drawing.Size(76, 21);
             this.cboValveBaud.TabIndex = 11;
+            this.cboValveBaud.Text = "19200";
             // 
             // cboValvePort
             // 
@@ -1126,14 +1135,6 @@
             this.btnValveHome.Text = "Home Valve";
             this.btnValveHome.UseVisualStyleBackColor = true;
             this.btnValveHome.Click += new System.EventHandler(this.btnValveHome_Click);
-            // 
-            // cboSetValvePosition
-            // 
-            this.cboSetValvePosition.FormattingEnabled = true;
-            this.cboSetValvePosition.Location = new System.Drawing.Point(231, 72);
-            this.cboSetValvePosition.Name = "cboSetValvePosition";
-            this.cboSetValvePosition.Size = new System.Drawing.Size(121, 21);
-            this.cboSetValvePosition.TabIndex = 93;
             // 
             // frmMain
             // 

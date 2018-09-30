@@ -437,12 +437,10 @@
             // rbExtra
             // 
             this.rbExtra.AutoSize = true;
-            this.rbExtra.Checked = true;
             this.rbExtra.Location = new System.Drawing.Point(40, 16);
             this.rbExtra.Name = "rbExtra";
             this.rbExtra.Size = new System.Drawing.Size(32, 17);
             this.rbExtra.TabIndex = 1;
-            this.rbExtra.TabStop = true;
             this.rbExtra.Text = "E";
             this.rbExtra.UseVisualStyleBackColor = true;
             // 

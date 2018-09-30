@@ -292,6 +292,8 @@ namespace SyringePump
             SendData();
 
             WaitForPumpNotBusy();
+
+            rbOutput.Checked = true;
         }
 
         private void btnExecInitToRight_Click(object sender, EventArgs e)
@@ -303,6 +305,8 @@ namespace SyringePump
             SendData();
 
             WaitForPumpNotBusy();
+
+            rbOutput.Checked = true;
         }
 
         private void btnExecAbsPos_Click(object sender, EventArgs e)

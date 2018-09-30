@@ -12,33 +12,10 @@ namespace SyringePump
 {
     public partial class frmMain : Form
     {
-        internal ComPortManager Comm { get; set; } = new ComPortManager();
+        internal ComPortManager PumpComm { get; set; } = new ComPortManager();
+        internal ComPortManager ValveComm { get; set; } = new ComPortManager();
 
         string transType = string.Empty;
-
-        public enum Accel
-        {
-            A2500 = 1,
-            A5000 = 2,
-            A7500 = 3,
-            A10000 = 4,
-            A12500 = 5,
-            A15000 = 6,
-            A17500 = 7,
-            A20000 = 8,
-            A22500 = 9,
-            A25000 = 10,
-            A27500 = 11,
-            A30000 = 12,
-            A32500 = 13,
-            A35000 = 14,
-            A37500 = 15,
-            A40000 = 16,
-            A42500 = 17,
-            A45000 = 18,
-            A47500 = 19,
-            A50000 = 20
-        }
 
         public frmMain()
         {
@@ -47,26 +24,31 @@ namespace SyringePump
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            // Syringe pump
             LoadValues();
             SetDefaults();
             SetControlState();
+
+            // Rotary Valve
+            LoadValveValues();
+            SetValveDefaults();
+            SetValveControlState();
         }
 
-        private void cmdOpen_Click(object sender, EventArgs e)
+        private void btnOpen_Click(object sender, EventArgs e)
         {
-            Comm.PortName = cboPort.Text;
-            Comm.Parity = cboParity.Text;
-            Comm.StopBits = cboStop.Text;
-            Comm.DataBits = cboData.Text;
-            Comm.BaudRate = cboBaud.Text;
-            //Comm.DisplayWindow = rtbDisplay;
-            Comm.OpenPort();
+            PumpComm.PortName = cboPort.Text;
+            PumpComm.Parity = cboParity.Text;
+            PumpComm.StopBits = cboStop.Text;
+            PumpComm.DataBits = cboData.Text;
+            PumpComm.BaudRate = cboBaud.Text;
+            PumpComm.OpenPort();
 
-            if (true == Comm.IsPortOpen)
+            if (true == PumpComm.IsPortOpen)
             {
-                cmdOpen.Enabled = false;
-                cmdClose.Enabled = true;
-                cmdSend.Enabled = true;
+                btnOpen.Enabled = false;
+                btnClose.Enabled = true;
+                btnSend.Enabled = true;
                 txtSend.Enabled = true;
             }
         }
@@ -90,10 +72,10 @@ namespace SyringePump
         /// </summary>
         private void LoadValues()
         {
-            Comm.DisplayWindow = rtbDisplay;
-            Comm.SetPortNameValues(cboPort);
-            Comm.SetParityValues(cboParity);
-            Comm.SetStopBitValues(cboStop);
+            PumpComm.DisplayWindow = rtbDisplay;
+            PumpComm.SetPortNameValues(cboPort);
+            PumpComm.SetParityValues(cboParity);
+            PumpComm.SetStopBitValues(cboStop);
         }
 
         /// <summary>
@@ -103,27 +85,27 @@ namespace SyringePump
         private void SetControlState()
         {
             rdoText.Checked = true;
-            cmdSend.Enabled = false;
-            cmdClose.Enabled = false;
+            btnSend.Enabled = false;
+            btnClose.Enabled = false;
 
-            string[] accels = Enum.GetNames(typeof(Accel));
+            string[] accels = Enum.GetNames(typeof(HamiltonSyringe.Accel));
             cbSetAccel.Items.AddRange(accels);
             cbSetAccel.SelectedIndex = 2;
         }
 
-        private void cmdSend_Click(object sender, EventArgs e)
+        private void btnSend_Click(object sender, EventArgs e)
         {
             SendData();
         }
 
         private void SendData()
         {
-            Comm.WriteData(txtSend.Text);
-            if (!Comm.DataReadyEvent.WaitOne(1000))
+            PumpComm.WriteData(txtSend.Text);
+            if (!PumpComm.DataReadyEvent.WaitOne(1000))
             {
-                Comm.DisplayData(ComPortManager.MessageType.Error, "Data was not received in 1 second!\n");
+                PumpComm.DisplayData(ComPortManager.MessageType.Error, "Data was not received in 1 second!\n");
             }
-            Comm.DataReadyEvent.Reset();
+            PumpComm.DataReadyEvent.Reset();
             txtSend.SelectAll();
         }
 
@@ -131,18 +113,18 @@ namespace SyringePump
         {
             if (rdoHex.Checked == true)
             {
-                Comm.CurrentTransmissionType = ComPortManager.TransmissionType.Hex;
+                PumpComm.CurrentTransmissionType = ComPortManager.TransmissionType.Hex;
             }
             else
             {
-                Comm.CurrentTransmissionType = ComPortManager.TransmissionType.Text;
+                PumpComm.CurrentTransmissionType = ComPortManager.TransmissionType.Text;
             }
 
         }
 
         private void chkBoxEOL_CheckedChanged(object sender, EventArgs e)
         {
-            Comm.AutoEOL = chkBoxEOL.Checked;
+            PumpComm.AutoEOL = chkBoxEOL.Checked;
         }
 
         private void txtSend_KeyPress(object sender, KeyPressEventArgs e)
@@ -153,14 +135,14 @@ namespace SyringePump
             }
         }
 
-        private void cmdClose_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
-            Comm.ClosePort();
-            if (false == Comm.IsPortOpen)
+            PumpComm.ClosePort();
+            if (false == PumpComm.IsPortOpen)
             {
-                cmdOpen.Enabled = true;
-                cmdClose.Enabled = false;
-                cmdSend.Enabled = false;
+                btnOpen.Enabled = true;
+                btnClose.Enabled = false;
+                btnSend.Enabled = false;
                 txtSend.Enabled = false;
             }
         }
@@ -170,7 +152,7 @@ namespace SyringePump
             Application.Exit();
         }
 
-        private bool PumpBusy => Comm.RcvdMsg != "/0`\u0003";
+        private bool PumpBusy => PumpComm.RcvdMsg != "/0`\u0003";
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
@@ -265,7 +247,7 @@ namespace SyringePump
 
         private void btnSetAccel_Click(object sender, EventArgs e)
         {
-            Accel a = (Accel)Enum.Parse(typeof(Accel), cbSetAccel.SelectedItem.ToString());
+            HamiltonSyringe.Accel a = (HamiltonSyringe.Accel)Enum.Parse(typeof(HamiltonSyringe.Accel), cbSetAccel.SelectedItem.ToString());
             txtSend.Text = $"/{Pump}L" + ((int)a).ToString();
             SendData();
         }
@@ -366,7 +348,7 @@ namespace SyringePump
         {
             WaitForPumpNotBusy();
 
-            Accel a = (Accel)Enum.Parse(typeof(Accel), cbSetAccel.SelectedItem.ToString());
+            HamiltonSyringe.Accel a = (HamiltonSyringe.Accel)Enum.Parse(typeof(HamiltonSyringe.Accel), cbSetAccel.SelectedItem.ToString());
             txtSend.Text = $"/{Pump}L" + ((int)a).ToString() + "R";
             SendData();
 
@@ -421,5 +403,135 @@ namespace SyringePump
             } while (PumpBusy);
         }
 
+        /// <summary>
+        /// Method to initialize rotary valve serial port
+        /// values to standard defaults
+        /// </summary>
+        private void SetValveDefaults()
+        {
+            cboValvePort.SelectedIndex = 0;
+            cboValveBaud.SelectedText = "19200";
+            cboValveParity.SelectedIndex = 0;
+            cboValveStop.SelectedIndex = 1;
+            cboValveData.SelectedIndex = 1;
+        }
+
+        /// <summary>
+        /// methods to load rotary valve serial
+        /// port option values
+        /// </summary>
+        private void LoadValveValues()
+        {
+            ValveComm.DisplayWindow = rtbValveDisplay;
+            ValveComm.SetPortNameValues(cboValvePort);
+            ValveComm.SetParityValues(cboValveParity);
+            ValveComm.SetStopBitValues(cboValveStop);
+        }
+
+        /// <summary>
+        /// method to set the state of rotary valve controls
+        /// when the form first loads
+        /// </summary>
+        private void SetValveControlState()
+        {
+            rdoValveText.Checked = true;
+            btnValveSend.Enabled = false;
+            btnValveClose.Enabled = false;
+
+            string[] positions = Enum.GetNames(typeof(IdexRotaryValve.RotaryValvePosition));
+            cboSetValvePosition.Items.AddRange(positions);
+            cboSetValvePosition.SelectedIndex = 0;
+        }
+
+        private void btnValveOpen_Click(object sender, EventArgs e)
+        {
+            ValveComm.PortName = cboValvePort.Text;
+            ValveComm.Parity = cboValveParity.Text;
+            ValveComm.StopBits = cboValveStop.Text;
+            ValveComm.DataBits = cboValveData.Text;
+            ValveComm.BaudRate = cboValveBaud.Text;
+            ValveComm.OpenPort();
+
+            if (true == ValveComm.IsPortOpen)
+            {
+                ValveComm.NewLine = "\r";
+                btnValveOpen.Enabled = false;
+                btnValveClose.Enabled = true;
+                btnValveSend.Enabled = true;
+                txtValveSend.Enabled = true;
+            }
+        }
+
+        private void SendValveData()
+        {
+            ValveComm.WriteData(txtValveSend.Text);
+            if (!ValveComm.DataReadyEvent.WaitOne(5000))
+            {
+                ValveComm.DisplayData(ComPortManager.MessageType.Error, "Data was not received in 5 seconds!\n");
+            }
+            ValveComm.DataReadyEvent.Reset();
+            txtValveSend.SelectAll();
+        }
+
+        private void rdoValveHex_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoValveHex.Checked == true)
+            {
+                ValveComm.CurrentTransmissionType = ComPortManager.TransmissionType.Hex;
+            }
+            else
+            {
+                ValveComm.CurrentTransmissionType = ComPortManager.TransmissionType.Text;
+            }
+        }
+
+        private void chkBoxValveEOL_CheckedChanged(object sender, EventArgs e)
+        {
+            ValveComm.AutoEOL = chkBoxValveEOL.Checked;
+        }
+
+        private void txtValveSend_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 0x0D)
+            {
+                SendValveData();
+            }
+        }
+
+        private void btnValveClose_Click(object sender, EventArgs e)
+        {
+            ValveComm.ClosePort();
+            if (false == ValveComm.IsPortOpen)
+            {
+                btnValveOpen.Enabled = true;
+                btnValveClose.Enabled = false;
+                btnValveSend.Enabled = false;
+                txtValveSend.Enabled = false;
+            }
+        }
+
+        private void btnValveSend_Click(object sender, EventArgs e)
+        {
+            SendValveData();
+        }
+
+        private void btnValveHome_Click(object sender, EventArgs e)
+        {
+            txtValveSend.Text = $"M";
+            SendValveData();
+        }
+
+        private void btnValveStatus_Click(object sender, EventArgs e)
+        {
+            txtValveSend.Text = $"S";
+            SendValveData();
+        }
+
+        private void btnValveMoveToPosition_Click(object sender, EventArgs e)
+        {
+            IdexRotaryValve.RotaryValvePosition p = (IdexRotaryValve.RotaryValvePosition)Enum.Parse(typeof(IdexRotaryValve.RotaryValvePosition), cboSetValvePosition.SelectedItem.ToString());
+            txtValveSend.Text = $"P" + ((int)p).ToString("X2");
+            SendValveData();
+        }
     }
 }

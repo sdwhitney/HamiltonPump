@@ -73,6 +73,22 @@ namespace SyringePump
         /// </summary>
         public string PortName { get; set; } = string.Empty;
 
+        public string NewLine
+        {
+            get
+            {
+                if (comPort != null)
+                    return comPort.NewLine;
+                else
+                    return string.Empty;
+            }
+            set
+            {
+                if (comPort != null)
+                    comPort.NewLine = value;
+            }
+        }
+
         public string RcvdMsg { get; set; } = string.Empty;
 
         public ManualResetEvent DataReadyEvent { get; set; } = new ManualResetEvent(false);
@@ -318,7 +334,6 @@ namespace SyringePump
         #region SetPortNameValues
         public void SetPortNameValues(object obj)
         {
-
             string[] ports = SerialPort.GetPortNames();
             Array.Sort(ports);
             foreach (string str in ports)
@@ -346,12 +361,19 @@ namespace SyringePump
                     //msg = comPort.ReadExisting().Trim();
                     msg = comPort.ReadLine().Trim();
                     //display the data to the user
+#if false
                     if (msg.Length > 0)
                     {
                         DataReadyEvent.Set();
                         RcvdMsg = msg;
                         DisplayData(MessageType.Incoming, msg + "\n");
                     }
+#else
+                    // Don't check for 0 length - ReadLine() reads until NewLine anyway, and Trim() removes trailing white space
+                    DataReadyEvent.Set();
+                    RcvdMsg = msg;
+                    DisplayData(MessageType.Incoming, msg + "\n");
+#endif
                     break;
                 //user chose binary
                 case TransmissionType.Hex:
@@ -381,6 +403,6 @@ namespace SyringePump
                     break;
             }
         }
-        #endregion
+#endregion
     }
 }

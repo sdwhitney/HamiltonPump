@@ -54,6 +54,8 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="HamiltonSyringe.cs" />
+    <Compile Include="IdexRotaryValve.cs" />
+    <Compile Include="IRotaryValve.cs" />
     <Compile Include="ISyringePump.cs" />
     <Compile Include="ISyringePumpHAL.cs" />
     <Compile Include="Program.cs" />

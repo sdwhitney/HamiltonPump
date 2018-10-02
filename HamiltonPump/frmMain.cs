@@ -15,6 +15,8 @@ namespace SyringePump
         internal ComPortManager PumpComm { get; set; } = new ComPortManager();
         internal ComPortManager ValveComm { get; set; } = new ComPortManager();
 
+        public RichTextBox ExerciserOutput { get; set; }
+
         string transType = string.Empty;
 
         public frmMain()
@@ -33,6 +35,8 @@ namespace SyringePump
             LoadValveValues();
             SetValveDefaults();
             SetValveControlState();
+
+            ExerciserOutput = rtbExerciserOutput;
         }
 
         private void btnOpen_Click(object sender, EventArgs e)

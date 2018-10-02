@@ -20,7 +20,7 @@ namespace SyringePump
         /// Queries the status of the rotary valve
         /// </summary>
         /// <returns>Rotary valve status - position or error code</returns>
-        int QueryStatus();
+        string QueryStatus();
 
         /// <summary>
         /// Move the rotary valve to the specified position

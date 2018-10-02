@@ -101,7 +101,7 @@ namespace SyringePump
         /// </summary>
         /// <param name="status">Status byte returned from pump</param>
         /// <returns>true if pump is busy, false otherwise</returns>
-        bool QueryStatus(out char status);
+        bool QueryStatus(out byte status);
 
         /// <summary>
         /// Perform a delay of the specified number of milliseconds

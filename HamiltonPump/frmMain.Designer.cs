@@ -116,6 +116,9 @@
             this.cboValvePort = new System.Windows.Forms.ComboBox();
             this.btnValveStatus = new System.Windows.Forms.Button();
             this.btnValveHome = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label13 = new System.Windows.Forms.Label();
+            this.rtbExerciserOutput = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.grpPump.SuspendLayout();
@@ -131,12 +134,14 @@
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(0, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1134,6 +1139,35 @@
             this.btnValveHome.UseVisualStyleBackColor = true;
             this.btnValveHome.Click += new System.EventHandler(this.btnValveHome_Click);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Controls.Add(this.rtbExerciserOutput);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(972, 447);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Exerciser";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(546, 22);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(130, 13);
+            this.label13.TabIndex = 87;
+            this.label13.Text = "Serial Port Communication";
+            // 
+            // rtbExerciserOutput
+            // 
+            this.rtbExerciserOutput.Location = new System.Drawing.Point(549, 40);
+            this.rtbExerciserOutput.Name = "rtbExerciserOutput";
+            this.rtbExerciserOutput.Size = new System.Drawing.Size(423, 408);
+            this.rtbExerciserOutput.TabIndex = 86;
+            this.rtbExerciserOutput.Text = "";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1166,6 +1200,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1260,6 +1296,9 @@
         private System.Windows.Forms.Button btnValveStatus;
         private System.Windows.Forms.Button btnValveHome;
         private System.Windows.Forms.ComboBox cboSetValvePosition;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.RichTextBox rtbExerciserOutput;
     }
 }
 
